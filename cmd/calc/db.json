@@ -1,0 +1,116 @@
+{
+  "limit_breaks": [
+    {
+      "name": "Degenerator",
+      "card_equivalent": "Gesper",
+      "card_magic_ratio": 1
+    },
+    {
+      "name": "Bad Breath",
+      "card_equivalent": "Malboro",
+      "card_magic_ratio": 4
+    },
+    {
+      "name": "Fire Breath",
+      "card_equivalent": "Ruby Dragon",
+      "card_magic_ratio": 10
+    },
+    {
+      "name": "Mighty Guard",
+      "card_equivalent": "Behemoth",
+      "card_magic_ratio": 10
+    },
+    {
+      "name": "Gatling Gun",
+      "card_equivalent": "SAM08G",
+      "card_magic_ratio": 1
+    },
+    {
+      "name": "Aqua Breath",
+      "card_equivalent": "Fastitocalon",
+      "card_magic_ratio": 1
+    },
+    {
+      "name": "Electrocute",
+      "card_equivalent": "Creeps",
+      "card_magic_ratio": 1
+    },
+    {
+      "name": "Acid",
+      "card_equivalent": "Gayla",
+      "card_magic_ratio": 1
+    },
+    {
+      "name": "L?Death",
+      "card_equivalent": "Tri-Face",
+      "card_magic_ratio": 1
+    },
+    {
+      "name": "Ultra Waves",
+      "card_equivalent": "Caterchipillar",
+      "card_magic_ratio": 1
+    }
+  ],
+  "magic": [
+    {
+      "name": "Flare",
+      "card_equivalent": "Ruby Dragon",
+      "card_magic_ratio": 2.0
+    },
+    {
+      "name": "Tornado",
+      "card_equivalent": "Abyss Worm",
+      "card_magic_ratio": 20.0
+    },
+    {
+      "name": "Firaga",
+      "card_equivalent": "Hexadragon",
+      "card_magic_ratio": 6.67
+    },
+    {
+      "name": "Blizzaga",
+      "card_equivalent": "Snow Lion",
+      "card_magic_ratio": 20.0
+    },
+    {
+      "name": "Thundaga",
+      "card_equivalent": "Blitz",
+      "card_magic_ratio": 20.0
+    },
+    {
+      "name": "Water",
+      "card_equivalent": "Fastitocalon",
+      "card_magic_ratio": 50.0
+    },
+    {
+      "name": "Aero",
+      "card_equivalent": "Thrustaevis",
+      "card_magic_ratio": 20.0
+    },
+    {
+      "name": "Berserk",
+      "card_equivalent": "Elastoid",
+      "card_magic_ratio": 20.0
+    },
+    {
+      "name": "Life",
+      "card_equivalent": "Torama",
+      "card_magic_ratio": 20.0
+    },
+    {
+      "name": "Death",
+      "card_equivalent": "Belhelmel",
+      "card_magic_ratio": 30.0
+    },
+    {
+      "name": "Demi",
+      "card_equivalent": "Gesper",
+      "card_magic_ratio": 10.0
+    },
+    {
+      "name": "Regen",
+      "card_equivalent": "Mesmerize",
+      "card_magic_ratio": 20.0
+    }
+  ]
+}
