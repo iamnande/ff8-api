@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  api:
+    build: .
+    image: ff8-api:latest
+    container_name: ff8-api
+    environment:
+      ENVIRONMENT: "local"
+    ports:
+      - "8000:8000"
