@@ -41,6 +41,7 @@ func NewServer(cfg *config.Config) *Server {
 	router.Pre(middleware.MethodOverride())
 	router.Use(
 		middleware.Gzip(),
+		middleware.Logger(),
 		middleware.Recover(),
 		middleware.Decompress(),
 	)

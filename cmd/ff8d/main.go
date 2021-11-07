@@ -10,10 +10,13 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/pkgerrors"
 
+	"github.com/iamnande/ff8-api/internal/datastore"
+
 	"github.com/iamnande/ff8-api/internal/api"
 	"github.com/iamnande/ff8-api/internal/config"
 )
 
+// TODO: test everything mo betta
 func main() {
 
 	// api: initialize environment configuration
@@ -28,8 +31,14 @@ func main() {
 	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill)
 	defer cancel()
 
+	// api: initialize datastore implementation client
+	ds, err := datastore.NewStaticDS()
+	if err != nil {
+		logger.Fatal().Msgf("failed to initialize datastore: %s", err)
+	}
+
 	// api: initialize the API service
-	ff8API := api.NewFF8API(ctx, cfg, logger)
+	ff8API := api.NewFF8API(cfg, logger, ds)
 
 	// api: initialize listener
 	startListener(ctx, ff8API)

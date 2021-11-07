@@ -6,31 +6,34 @@ import (
 
 	"github.com/rs/zerolog"
 
+	"github.com/iamnande/ff8-api/internal/datastore"
+
 	"github.com/iamnande/ff8-api/internal/api/server"
 	"github.com/iamnande/ff8-api/internal/config"
 )
 
 // FF8API is the FF8 API application.
 type FF8API struct {
-	ctx context.Context
 	cfg *config.Config
+	ds  datastore.Datastore
 	log zerolog.Logger
 	svr *server.Server
 }
 
 // NewFF8API initializes a fresh instance of the FF8 API.
-func NewFF8API(ctx context.Context, cfg *config.Config, log zerolog.Logger) *FF8API {
+func NewFF8API(cfg *config.Config, log zerolog.Logger, ds datastore.Datastore) *FF8API {
 
 	//  api: initialize new application instance
 	api := &FF8API{
-		ctx: ctx,
 		cfg: cfg,
+		ds:  ds,
 		log: log,
 		svr: server.NewServer(cfg),
 	}
 
 	// api: initialize domain instances
-	// TODO: register domain instances
+	// TODO: move these into sub-packages and chain the APIs
+	api.svr.POST("/calculate", api.HandleCalculate)
 
 	// api: return initialized API
 	return api
