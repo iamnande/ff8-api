@@ -36,7 +36,8 @@ restart: down up ## runtime: restart environment
 # --------------------------------------------------
 # Build Targets
 # --------------------------------------------------
-BUILD_DIR := $(APP_WORKDIR)/build
+BUILD_DIR         := $(APP_WORKDIR)/build
+GENERATE_PACKAGES := $(shell go list -f '{{.Dir}}' ./... | grep -v 'cmd')
 
 .PHONY: build-clean
 build-clean: ## build: clean build workspace
@@ -51,6 +52,11 @@ build-binary: build-clean ## build: build binary file
 		go build \
 		-o $(BUILD_DIR)/api -ldflags '-extldflags "-static"' \
 		cmd/ff8d/main.go
+
+.PHONY: build-generate
+build-generate: ## build: generate dynamic files (mocks and API spec)
+	@echo $(APP_LOG_FMT) "generating dynamic files"
+	@SWAGGER_GENERATE_EXTENSION=false go generate ./...
 
 # --------------------------------------------------
 # Test Targets

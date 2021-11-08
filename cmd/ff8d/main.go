@@ -16,7 +16,6 @@ import (
 	"github.com/iamnande/ff8-api/internal/config"
 )
 
-// TODO: test everything mo betta
 func main() {
 
 	// api: initialize environment configuration
@@ -32,12 +31,13 @@ func main() {
 	defer cancel()
 
 	// api: initialize datastore implementation client
-	ds, err := datastore.NewStaticDS()
+	ds, err := datastore.NewDatastore()
 	if err != nil {
 		logger.Fatal().Msgf("failed to initialize datastore: %s", err)
 	}
 
 	// api: initialize the API service
+	// TODO: convert this into lambda-aware logic / remove listener
 	ff8API := api.NewFF8API(cfg, logger, ds)
 
 	// api: initialize listener

@@ -1,8 +1,7 @@
 package api
 
 import (
-	"fmt"
-	"math"
+	"errors"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -10,52 +9,53 @@ import (
 	"github.com/iamnande/ff8-api/internal/datastore"
 )
 
-type CalculateRequest struct {
+// CalculateInput is the calculation input operation.
+type CalculateInput struct {
 	Name  string               `json:"name"`
 	Type  datastore.RecordType `json:"type"`
 	Count float64              `json:"count"`
 }
 
-// CalculateResponse is something nice.
-// TODO: struct comments
-type CalculateResponse struct {
+// CalculateOutput is the calculation input operation.
+type CalculateOutput struct {
 	Name     string `json:"name"`
 	Card     string `json:"card"`
 	Quantity int    `json:"quantity"`
 }
 
-// HandleCalculate handles the calculation of number of cards required for the
-// desired magic.
-// TODO: move all business logic into private method below
-func (api *FF8API) HandleCalculate(c echo.Context) error {
+// Calculate is the API endpoint for calculating the conversion of cards to
+// Magic or Limit Breaks.
+// TODO: test the handler
+func (api *FF8API) Calculate(c echo.Context) error {
 
 	// calculate: deserialize input
-	// TODO: log something, like anything
-	input := new(CalculateRequest)
+	input := new(CalculateInput)
 	if err := c.Bind(input); err != nil {
 		return c.JSON(http.StatusBadRequest, map[string]string{
 			"message": "bad request format",
 		})
 	}
 
-	// calculate: fetch desired item from datastore
-	record, err := api.ds.DescribeRecord(input.Name, input.Type)
+	// calculate: perform calculation
+	output, err := api.calc.CardMagicRatio(c.Request().Context(), input.Name, input.Type, input.Count)
 	if err != nil {
-		return c.JSON(http.StatusNotFound, map[string]string{
-			"message": fmt.Sprintf("%s of type %s not found",
-				input.Name, input.Type),
+		// TODO: move the errors to a file (known types/schema)
+		// TODO: move the error handling to a central function/method
+		if errors.Is(err, datastore.ErrItemNotFound) {
+			return c.JSON(http.StatusNotFound, map[string]string{
+				"error": err.Error(),
+			})
+		}
+		return c.JSON(http.StatusInternalServerError, map[string]string{
+			"error": err.Error(),
 		})
 	}
 
-	// calculate: perform ratio calculation
-	quantity := input.Count / record.CardMagicRatio
-	output := &CalculateResponse{
-		Name:     record.Name,
-		Card:     record.CardEquivalent,
-		Quantity: int(math.Round(quantity*10) / 10),
-	}
-
 	// calculate: fetch items to be calculated
-	return c.JSONPretty(http.StatusOK, output, "  ")
+	return c.JSON(http.StatusOK, &CalculateOutput{
+		Name:     output.Name,
+		Card:     output.Card,
+		Quantity: output.Quantity,
+	})
 
 }

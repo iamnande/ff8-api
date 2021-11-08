@@ -6,34 +6,35 @@ import (
 
 	"github.com/rs/zerolog"
 
-	"github.com/iamnande/ff8-api/internal/datastore"
-
 	"github.com/iamnande/ff8-api/internal/api/server"
+	"github.com/iamnande/ff8-api/internal/calculator"
 	"github.com/iamnande/ff8-api/internal/config"
+	"github.com/iamnande/ff8-api/internal/datastore"
 )
 
 // FF8API is the FF8 API application.
 type FF8API struct {
-	cfg *config.Config
-	ds  datastore.Datastore
-	log zerolog.Logger
-	svr *server.Server
+	cfg  *config.Config
+	ds   datastore.Datastore
+	calc calculator.Calculator
+	log  zerolog.Logger
+	svr  *server.Server
 }
 
 // NewFF8API initializes a fresh instance of the FF8 API.
 func NewFF8API(cfg *config.Config, log zerolog.Logger, ds datastore.Datastore) *FF8API {
 
-	//  api: initialize new application instance
+	// api: initialize new application instance
 	api := &FF8API{
-		cfg: cfg,
-		ds:  ds,
-		log: log,
-		svr: server.NewServer(cfg),
+		cfg:  cfg,
+		ds:   ds,
+		log:  log,
+		calc: calculator.NewCalculator(ds),
+		svr:  server.NewServer(cfg),
 	}
 
-	// api: initialize domain instances
-	// TODO: move these into sub-packages and chain the APIs
-	api.svr.POST("/calculate", api.HandleCalculate)
+	// api: initialize handler instance
+	api.svr.POST("/calculate", api.Calculate)
 
 	// api: return initialized API
 	return api

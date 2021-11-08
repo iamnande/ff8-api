@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/caarlos0/env/v6 v6.7.2
+	github.com/golang/mock v1.6.0
 	github.com/labstack/echo/v4 v4.6.1
 	github.com/rs/zerolog v1.26.0
 )
