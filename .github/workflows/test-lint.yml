@@ -1,9 +1,9 @@
-name: golangci-lint
+name: Lint Testing
 
 on: [ pull_request ]
 
 jobs:
-  golangci:
+  golangci-lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

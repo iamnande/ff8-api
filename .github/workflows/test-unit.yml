@@ -18,9 +18,3 @@ jobs:
 
       - name: Run Test Suite
         run: make test-unit
-
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v2
-        with:
-          name: unit-test-results
-          path: coverage/unit/**
