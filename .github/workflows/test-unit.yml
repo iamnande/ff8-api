@@ -16,9 +16,6 @@ jobs:
       - name: Build
         run: make build-binary
 
-      - name: Setup Test Dependencies
-        run: make test-dependencies
-
       - name: Run Test Suite
         run: make test-unit
 
