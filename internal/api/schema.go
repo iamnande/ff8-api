@@ -22,7 +22,7 @@ func (i *input) validate() (bool, map[string]string) {
 
 	// validate: error bag
 	ok := true
-	bag := make(map[string]string, 0)
+	bag := make(map[string]string)
 
 	//  validate: name
 	if i.Name != "" {
@@ -61,7 +61,7 @@ func bind(body string) (*input, error) {
 		for key, err := range bag {
 			msg += fmt.Sprintf("%s: %s,", key, err)
 		}
-		strings.TrimRight(msg, ",")
+		msg = strings.TrimRight(msg, ",")
 		return nil, fmt.Errorf(msg)
 	}
 
