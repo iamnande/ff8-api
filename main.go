@@ -8,7 +8,6 @@ import (
 	"github.com/rs/zerolog/pkgerrors"
 
 	"github.com/iamnande/ff8-api/internal/api"
-
 	"github.com/iamnande/ff8-api/internal/datastore"
 )
 

@@ -51,7 +51,7 @@ build-binary: build-clean ## build: build binary file
 	@CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
 		go build \
 		-o $(BUILD_DIR)/api -ldflags '-extldflags "-static"' \
-		cmd/ff8d/main.go
+		main.go
 
 .PHONY: build-generate
 build-generate: ## build: generate dynamic files (mocks and API spec)
