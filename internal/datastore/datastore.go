@@ -31,7 +31,7 @@ var (
 
 // NewDatastore creates a fresh in stance of a static, file based, Datastore
 // implementation.
-// TODO: test this package
+// TODO: test this package.
 func NewDatastore() (Datastore, error) {
 
 	// new: read embedded datastore file

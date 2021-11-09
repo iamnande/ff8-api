@@ -5,6 +5,6 @@ import (
 )
 
 var (
-	// ErrItemNotFound indicates the item was not found
+	// ErrItemNotFound indicates the item was not found.
 	ErrItemNotFound = errors.New("item not found")
 )

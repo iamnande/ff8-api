@@ -79,7 +79,7 @@ test-clean: ## test: clean test workspace
 # TODO: move to golangci-lint for easier CI integration
 test-lint: ## test: validate the absence of lint failures
 	@echo $(APP_LOG_FMT) "validating the absence of lint failures"
-	@revive -config .revive.toml -formatter friendly $(APP_PACKAGES)
+	@golangci-lint run --fix -v
 
 .PHONY: test-unit
 # TODO: double check this against actions and if it needs anything

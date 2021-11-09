@@ -18,7 +18,7 @@ var (
 	ds        *mockDatastore.MockDatastore
 )
 
-// testSetup handles common test setup actions for the calculator package
+// testSetup handles common test setup actions for the calculator package.
 func testSetup(t *testing.T) {
 	ctx = context.Background()
 	ctrl = gomock.NewController(t)
@@ -40,7 +40,6 @@ func TestCardMagicRatio_Successful(t *testing.T) {
 	testSetup(t)
 
 	// test: case setup (mock expectations)
-	expectedCount := 15
 	expectedName := "Firaga"
 	expectedCard := "Hexadragon"
 
@@ -60,9 +59,9 @@ func TestCardMagicRatio_Successful(t *testing.T) {
 	}
 
 	// test: value checking
-	if expectedCard != actual.Card || expectedCount != actual.Quantity {
-		t.Errorf("expected-card=%s actual-card=%s expected-count=%v actual-count=%d",
-			expectedCard, actual.Card, expectedCount, actual.Quantity)
+	if expectedCard != actual.Card || 15.0 != actual.Quantity {
+		t.Errorf("expected-card=%s actual-card=%s actual-count=%d",
+			expectedCard, actual.Card, actual.Quantity)
 	}
 
 }
