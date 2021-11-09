@@ -1,64 +1,39 @@
 package main
 
 import (
-	"context"
-	"errors"
-	"net/http"
 	"os"
-	"os/signal"
 
+	runtime "github.com/aws/aws-lambda-go/lambda"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/pkgerrors"
 
-	"github.com/iamnande/ff8-api/internal/datastore"
-
 	"github.com/iamnande/ff8-api/internal/api"
-	"github.com/iamnande/ff8-api/internal/config"
+
+	"github.com/iamnande/ff8-api/internal/datastore"
+)
+
+var (
+	ff8 api.API
 )
 
 func main() {
 
-	// api: initialize environment configuration
-	cfg := config.MustLoad()
-
-	// api: initialize logging instance
-	zerolog.SetGlobalLevel(cfg.LogLevel)
+	// main: initialize logging instance
+	zerolog.SetGlobalLevel(zerolog.InfoLevel)
 	zerolog.ErrorStackMarshaler = pkgerrors.MarshalStack
 	logger := zerolog.New(os.Stdout).With().Timestamp().Logger()
 
-	// api: initialize root context
-	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill)
-	defer cancel()
-
-	// api: initialize datastore implementation client
-	ds, err := datastore.NewDatastore()
+	// main: initialize datastore client
+	dsc, err := datastore.NewDatastore()
 	if err != nil {
 		logger.Fatal().Msgf("failed to initialize datastore: %s", err)
+		return
 	}
 
-	// api: initialize the API service
-	// TODO: convert this into lambda-aware logic / remove listener
-	ff8API := api.NewFF8API(cfg, logger, ds)
+	// main: initialize "API" instance
+	ff8 = api.NewAPI(logger, dsc)
 
-	// api: initialize listener
-	startListener(ctx, ff8API)
-
-}
-
-// startListener is a function to initialize the HTTP listener.
-func startListener(ctx context.Context, api *api.FF8API) {
-
-	// api: handle shutdown gracefully
-	go func() {
-		<-ctx.Done()
-		api.Log().Info().Msg("shutdown signal received")
-		_ = api.Shutdown()
-	}()
-
-	// api: start RESTful listener
-	api.Log().Info().Msg("starting listener")
-	if err := api.Serve(); !errors.Is(err, http.ErrServerClosed) {
-		api.Log().Fatal().Msgf("failed to start rest listener on %q: %s", api.Address(), err)
-	}
+	// main: kick off lambda processing
+	runtime.Start(ff8.Calculate)
 
 }
