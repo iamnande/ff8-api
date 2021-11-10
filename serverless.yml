@@ -1,0 +1,16 @@
+service: ff8-magic-api
+provider:
+  name: aws
+  runtime: go1.x
+package:
+  exclude:
+    - ./**
+  include:
+    - ./build/**
+functions:
+  calculate:
+    handler: build/api
+    events:
+      - http:
+          path: /calculate
+          method: post

@@ -26,23 +26,23 @@ func TestAPI_Calculate(t *testing.T) {
 
 	// test: setup test cases
 	testCases := []struct {
-		input              events.APIGatewayV2HTTPRequest
+		input              events.APIGatewayProxyRequest
 		expectedStatusCode int
 	}{
 		{
-			input: events.APIGatewayV2HTTPRequest{
+			input: events.APIGatewayProxyRequest{
 				Body: `{"name":"Life","type":"Magic","count":100}`,
 			},
 			expectedStatusCode: http.StatusOK,
 		},
 		{
-			input: events.APIGatewayV2HTTPRequest{
+			input: events.APIGatewayProxyRequest{
 				Body: `{""::::23@#$@#^$^$"`,
 			},
 			expectedStatusCode: http.StatusBadRequest,
 		},
 		{
-			input: events.APIGatewayV2HTTPRequest{
+			input: events.APIGatewayProxyRequest{
 				Body: `{"name":"Potatoes","type":"Mashed","count":1000000.00}`,
 			},
 			expectedStatusCode: http.StatusInternalServerError,

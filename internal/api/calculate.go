@@ -11,8 +11,8 @@ import (
 // Magic or Limit Breaks.
 func (a *api) Calculate(
 	ctx context.Context,
-	request events.APIGatewayV2HTTPRequest,
-) (*events.APIGatewayV2HTTPResponse, error) {
+	request events.APIGatewayProxyRequest,
+) (*events.APIGatewayProxyResponse, error) {
 
 	// calculate: fetch request object
 	req, err := bind(request.Body)

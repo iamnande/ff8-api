@@ -73,7 +73,7 @@ func bind(body string) (*input, error) {
 
 // response will convert native types into an API Gateway consumable response
 // entity.
-func response(code int, obj interface{}) (*events.APIGatewayV2HTTPResponse, error) {
+func response(code int, obj interface{}) (*events.APIGatewayProxyResponse, error) {
 
 	// response: serialize response object
 	body, err := json.Marshal(obj)
@@ -87,7 +87,7 @@ func response(code int, obj interface{}) (*events.APIGatewayV2HTTPResponse, erro
 	}
 
 	// response: return converted response
-	return &events.APIGatewayV2HTTPResponse{
+	return &events.APIGatewayProxyResponse{
 		StatusCode: code,
 		Body:       string(body),
 		Headers:    map[string]string{"Content-Type": "application/json"},

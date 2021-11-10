@@ -18,8 +18,8 @@ type API interface {
 	// number of Triple Triad cards required for N desired Magic.
 	Calculate(
 		ctx context.Context,
-		request events.APIGatewayV2HTTPRequest,
-	) (*events.APIGatewayV2HTTPResponse, error)
+		request events.APIGatewayProxyRequest,
+	) (*events.APIGatewayProxyResponse, error)
 
 	// Log defines the required interaction syntax for retrieving an instance
 	// of the application logger.
