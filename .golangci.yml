@@ -260,6 +260,16 @@ issues:
         - gosec
         - lll
 
+    # exclude generate lines
+    - linters:
+        - lll
+      source: "^//go:generate"
+
+    # exclude long URLs
+    - linters:
+        - lll
+      source: "http?s://"
+
   # Independently of the option `exclude` we use default exclude patterns,
   # it can be disabled by this option. To list all
   # excluded by default patterns execute `golangci-lint run --help`.

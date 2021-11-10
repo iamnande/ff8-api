@@ -6,8 +6,8 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/rs/zerolog"
 
-	"github.com/iamnande/ff8-api/internal/calculator"
-	"github.com/iamnande/ff8-api/internal/datastore"
+	"github.com/iamnande/ff8-magic-api/internal/calculator"
+	"github.com/iamnande/ff8-magic-api/internal/datastore"
 )
 
 // API interface describes the required implementation all API providers must

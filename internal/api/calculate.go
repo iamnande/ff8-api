@@ -9,7 +9,10 @@ import (
 
 // Calculate is the API handler for calculating the conversion of cards to
 // Magic or Limit Breaks.
-func (a *api) Calculate(ctx context.Context, request events.APIGatewayV2HTTPRequest) (*events.APIGatewayV2HTTPResponse, error) {
+func (a *api) Calculate(
+	ctx context.Context,
+	request events.APIGatewayV2HTTPRequest,
+) (*events.APIGatewayV2HTTPResponse, error) {
 
 	// calculate: fetch request object
 	req, err := bind(request.Body)
