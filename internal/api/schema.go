@@ -78,7 +78,7 @@ func response(code int, obj interface{}) (*events.APIGatewayV2HTTPResponse, erro
 	// response: serialize response object
 	body, err := json.Marshal(obj)
 
-	// response: generate internal error if marshalling error found
+	// response: generate internal error if marshaling error found
 	if err != nil {
 		code = http.StatusInternalServerError
 		body, _ = json.Marshal(NewAPIError(
