@@ -7,8 +7,8 @@ import (
 
 	"github.com/golang/mock/gomock"
 
-	"github.com/iamnande/ff8-api/internal/datastore"
-	mockDatastore "github.com/iamnande/ff8-api/internal/datastore/mocks"
+	"github.com/iamnande/ff8-magic-api/internal/datastore"
+	mockDatastore "github.com/iamnande/ff8-magic-api/internal/datastore/mocks"
 )
 
 var (
@@ -59,9 +59,9 @@ func TestCardMagicRatio_Successful(t *testing.T) {
 	}
 
 	// test: value checking
-	if expectedCard != actual.Card || 15.0 != actual.Quantity {
+	if expectedCard != actual.Card || 15.0 != actual.Count {
 		t.Errorf("expected-card=%s actual-card=%s actual-count=%d",
-			expectedCard, actual.Card, actual.Quantity)
+			expectedCard, actual.Card, actual.Count)
 	}
 
 }

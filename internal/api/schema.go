@@ -3,12 +3,13 @@ package api
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"strings"
 	"unicode/utf8"
 
 	"github.com/aws/aws-lambda-go/events"
 
-	"github.com/iamnande/ff8-api/internal/datastore"
+	"github.com/iamnande/ff8-magic-api/internal/datastore"
 )
 
 // input is the calculation input operation.
@@ -75,7 +76,15 @@ func bind(body string) (*input, error) {
 func response(code int, obj interface{}) (*events.APIGatewayV2HTTPResponse, error) {
 
 	// response: serialize response object
-	body, _ := json.Marshal(obj)
+	body, err := json.Marshal(obj)
+
+	// response: generate internal error if marshalling error found
+	if err != nil {
+		code = http.StatusInternalServerError
+		body, _ = json.Marshal(NewAPIError(
+			fmt.Errorf("failed to generate response object"),
+		))
+	}
 
 	// response: return converted response
 	return &events.APIGatewayV2HTTPResponse{

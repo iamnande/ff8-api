@@ -1,4 +1,4 @@
-module github.com/iamnande/ff8-api
+module github.com/iamnande/ff8-magic-api
 
 go 1.17
 

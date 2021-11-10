@@ -7,8 +7,8 @@ import (
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/pkgerrors"
 
-	"github.com/iamnande/ff8-api/internal/api"
-	"github.com/iamnande/ff8-api/internal/datastore"
+	"github.com/iamnande/ff8-magic-api/internal/api"
+	"github.com/iamnande/ff8-magic-api/internal/datastore"
 )
 
 var (

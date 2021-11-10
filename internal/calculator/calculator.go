@@ -1,19 +1,19 @@
 package calculator
 
-//go:generate mockgen -destination=./mocks/calculator.go -package mocks github.com/iamnande/ff8-api/internal/calculator Calculator
+//go:generate mockgen -destination=./mocks/calculator.go -package mocks github.com/iamnande/ff8-magic-api/internal/calculator Calculator
 
 import (
 	"context"
 
-	"github.com/iamnande/ff8-api/internal/datastore"
-	"github.com/iamnande/ff8-api/internal/ratio"
+	"github.com/iamnande/ff8-magic-api/internal/datastore"
+	"github.com/iamnande/ff8-magic-api/internal/ratio"
 )
 
 // Response is the defined response of all calculations.
 type Response struct {
-	Name     string
-	Card     string
-	Quantity int
+	Name  string `json:"name"`
+	Card  string `json:"card"`
+	Count int    `json:"count"`
 }
 
 // Calculator interface describes the methods that all Calculator providers
@@ -88,9 +88,9 @@ func (c *calculator) cardMagicRatio(
 
 	// cmr: perform ratio calculation
 	return &Response{
-		Name:     record.Name,
-		Card:     record.CardEquivalent,
-		Quantity: ratio.Calculate(quantity, record.CardMagicRatio),
+		Name:  record.Name,
+		Card:  record.CardEquivalent,
+		Count: ratio.Calculate(quantity, record.CardMagicRatio),
 	}, nil
 
 }

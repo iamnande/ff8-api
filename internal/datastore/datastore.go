@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 )
 
-//go:generate mockgen -destination=./mocks/datastore.go -package mocks github.com/iamnande/ff8-api/internal/datastore Datastore
+//go:generate mockgen -destination=./mocks/datastore.go -package mocks github.com/iamnande/ff8-magic-api/internal/datastore Datastore
 
 // Datastore interface describes the methods that all Datastore providers
 // must satisfy.
