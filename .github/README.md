@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/iamnande/ff8-magic-api">
-    <img src="https://i.redd.it/r9ut7rwt7hj41.jpg" width="125px" alt="ff8"/>
+    <img src="https://i.redd.it/r9ut7rwt7hj41.jpg" width="250px" alt="ff8"/>
   </a>
 </p>
 
